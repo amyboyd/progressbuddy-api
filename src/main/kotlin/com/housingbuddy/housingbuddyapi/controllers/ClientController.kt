@@ -5,12 +5,17 @@ import com.housingbuddy.housingbuddyapi.services.ClientService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @Api
 @RestController
 @RequestMapping("/clients", produces = ["application/json"])
-class ClientController(@Autowired private val clientService: ClientService) {
+class ClientController(
+    @Autowired private val clientService: ClientService,
+    @Autowired private val mongoTemplate: MongoTemplate
+) {
     @GetMapping("/{clientID}")
     @ApiOperation("get client")
     fun retrieveClient(
@@ -40,6 +45,27 @@ class ClientController(@Autowired private val clientService: ClientService) {
         }
 
         return result
+    }
+
+    @PostMapping("/{clientID}/recordProgressScoreByType")
+    @ApiOperation("record client's latest progress score by type")
+    fun recordProgressScoreByType(
+        @PathVariable clientID: String,
+        @RequestParam type: Progress.Type,
+        @RequestParam score: Int,
+        @RequestParam comment: String
+    ) {
+        val client = clientService.retrieveClientByID(clientID)!!
+        val byType = client.getProgressByType(type)
+
+        val newHistory = Progress.ProgressHistory()
+        newHistory.date = Date()
+        newHistory.score = score
+        newHistory.comment = comment
+
+        byType.history.add(newHistory)
+
+        mongoTemplate.save(byType)
     }
 
     @GetMapping("/{clientID}/appointments")
