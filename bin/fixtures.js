@@ -2,15 +2,15 @@
 const apptClaireDepaul = {
     // first is Depaul, 12pm Monday (i.e. 25th Feb). address: "123 Some Street, EC2A 4AB". description: "This is a one-on-one with your case-worker to discuss the changes since your last appointment and your next steps.
 	_id: new ObjectId(),
-	title: "Depaul one on one",
+	title: "Depaul One-On-One",
 	durationMinutes: 60,
 	dateTime: new ISODate("2019-02-25T12:00:00Z"),
-	notes: "123 Some Street, EC2A 4AB \n \nThis is a one-on-one with your case-worker to discuss the changes since your last appointment and your next steps.",
+	notes: "123 Some Street, EC2A 4AB\n\nThis is a one-on-one with your case-worker to discuss the changes since your last appointment and your next steps.",
 	attended: false,
     imageURL: "https://s3.eu-west-2.amazonaws.com/faultfixers-misc/hackathon/depaul-logo.png",
 	reasonForNotAttending:  "Claire was too sick",
 	appointmentType: "Depaul Coaching",
-	appointmentStatus: "ATTENDED",
+	appointmentStatus: "NOT_SET",
 	appointmentPriority: "MANDATORY"
 };
 db.appointments.insert(apptClaireDepaul);
@@ -20,15 +20,30 @@ const apptClaireCityWest = {
     title: "CityWest Homes",
     durationMinutes: 30,
     dateTime: new ISODate("2019-02-30T16:30:00Z"),
-    notes: "Westminster Council Office, SW1X \n \nThis is to discuss your living situation and to try find you permanent accommodation via the council.",
+    notes: "Westminster Council Office, SW1X\n\nThis is to discuss your living situation and to try find you permanent accommodation via the council.",
     attended: false,
     imageURL: "https://s3.eu-west-2.amazonaws.com/faultfixers-misc/hackathon/citywest-logo.jpg",
-    reasonForNotAttending:  "Claire was too sick",
+    reasonForNotAttending: null,
     appointmentType: "City West Homing",
-    appointmentStatus: "NOT_ATTENDED",
+    appointmentStatus: "NOT_SET",
     appointmentPriority: "MANDATORY"
 };
 db.appointments.insert(apptClaireCityWest);
+
+const apptClaireDoctors = {
+    _id: new ObjectId(),
+    title: "Doctor's Appointment",
+    durationMinutes: 15,
+    dateTime: new ISODate("2019-02-15T09:30:00Z"),
+    notes: "Appointment scheduled for to ask for a referral to alcohol services.",
+    attended: false,
+    imageURL: "https://s3.eu-west-2.amazonaws.com/faultfixers-misc/hackathon/nhs-logo.jpg",
+    reasonForNotAttending:  'Claire was too sick',
+    appointmentType: 'Health',
+    appointmentStatus: 'NOT_ATTENDED',
+    appointmentPriority: 'SUGGESTED'
+};
+db.appointments.insert(apptClaireDoctors);
 
 const claireProgress = {
 	_id: new ObjectId(),
@@ -64,7 +79,8 @@ const clientClaire = {
 	address: 'Depaul Oldham',
 	appointments: [
 	    new DBRef('appointments', apptClaireDepaul._id),
-        new DBRef('appointments', apptClaireCityWest._id)
+        new DBRef('appointments', apptClaireCityWest._id),
+        new DBRef('appointments', apptClaireDoctors._id),
     ],
     events: [new DBRef('events', claireEvent._id)],
     progress: [new DBRef('progress', claireProgress._id)],
