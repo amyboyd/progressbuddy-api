@@ -1,11 +1,4 @@
-const coachBob = {
-	_id: new ObjectId(),
-	name: 'Bob',
-	bio: 'Bob has been working with Depaul since 2012. He studied medicine at UCL and now is a Senior Progression Coach in our Oldham center.',
-	jobTitle: 'Senior Progression Coach',
-	photo: '@todo',
-};
-db.coaches.insert(coachBob);
+const coachBobID = new ObjectId();
 
 const apptClaireDoctor = {
 	_id: new ObjectId(),
@@ -19,7 +12,6 @@ const apptClaireDoctor = {
 	appointmentStatus: "NOT_ATTENDED",
 	appointmentPriority: "SUGGESTED"
 };
-
 db.appointments.insert(apptClaireDoctor);
 
 const clientClaire = {
@@ -27,10 +19,21 @@ const clientClaire = {
 	name: 'Claire',
 	phone: '07123123123',
 	address: 'Depaul Oldham',
-	coach: new DBRef('coaches', coachBob._id),
+	coach: new DBRef('coaches', coachBobID),
 	appointments: [new DBRef('appointments', apptClaireDoctor._id)]
 };
 db.clients.insert(clientClaire);
+
+const coachBob = {
+	_id: coachBobID,
+	name: 'Bob',
+	bio: 'Bob has been working with Depaul since 2012. He studied medicine at UCL and now is a Senior Progression Coach in our Oldham center.',
+	jobTitle: 'Senior Progression Coach',
+	specialities : "Mental wellbeing",
+	photo: '@todo',
+	clients: new DBRef('clients', clientClaire._id)
+};
+db.coaches.insert(coachBob);
 
 db.users.insert({
 	email: 'coach-bob@example.com',

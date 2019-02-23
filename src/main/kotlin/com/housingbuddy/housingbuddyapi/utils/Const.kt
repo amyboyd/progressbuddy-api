@@ -53,5 +53,4 @@ object ProgressFields {
 	const val MANAGING_TENANCY_AND_ACCOMMODATION = "managingTenancyAndAccommodation"
 	const val CRIMINALOFFENDING = "criminalOffending"
 
-
 }

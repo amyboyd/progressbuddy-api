@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service
 class ClientService(@Autowired private val mongoTemplate: MongoTemplate) {
     fun retrieveClientByID(clientID: String): Client? {
 	    LOGGER.info("Retrieving Client with ID: $clientID")
-	    return mongoTemplate.findById(ObjectId(clientID), Client::class.java, Collections.CLIENTS_COLLECTION)
+	    val client = mongoTemplate.findById(ObjectId(clientID), Client::class.java, Collections.CLIENTS_COLLECTION)
+	    LOGGER.info("Client Retrieved! Their ame is: ${client?.name}")
+	    return client
     }
 
     private companion object {

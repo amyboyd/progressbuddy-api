@@ -18,7 +18,7 @@ data class Client(
     @DBRef
     var coach: Coach? = null, //potentially nullable
     @DBRef
-    var appointments: List<Appointment?> = mutableListOf(),
-    @DBRef
-    var progress: Progress? = null
+    var appointments: List<Appointment?> = mutableListOf()
+//    @DBRef
+//    var progress: Progress? = null
 )
