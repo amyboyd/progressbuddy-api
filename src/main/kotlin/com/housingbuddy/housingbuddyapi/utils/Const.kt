@@ -50,7 +50,7 @@ object ProgressFields {
 	const val PHYSICAL_HEALTH = "physicalHealth"
 	const val MENTAL_HEALTH = "mentalHealth"
 	const val MEANINGFUL_USE_OF_TIME = "meaningfulUseOfTime"
-	const val MANAGING_TENANACY_AND_ACCOMMODATION = "managingTenanacyAndAccommodation"
+	const val MANAGING_TENANCY_AND_ACCOMMODATION = "managingTenancyAndAccommodation"
 	const val CRIMINALOFFENDING = "criminalOffending"
 
 

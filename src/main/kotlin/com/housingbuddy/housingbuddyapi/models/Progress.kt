@@ -16,6 +16,6 @@ data class Progress (
 	var physicalHealth: String,
 	var mentalHealth: String,
 	var meaningfulUseOfTime: String,
-	var managingTenanacyAndAccommodation: String,
+	var managingTenancyAndAccommodation: String,
 	var criminalOffending: String
 )
