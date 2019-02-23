@@ -14,10 +14,16 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("appointments")
 class AppointmentController(@Autowired private val appointmentService: AppointmentService) {
 
-    @GetMapping(value = ["getAppointments/{clientID}"])
-    @ApiOperation(value = "get appointments")
+    @GetMapping(value = ["getAppointmentsForClient/{clientID}"])
+    @ApiOperation(value = "get appointments by client ID")
     fun retrieveAppointmentsForClient(
         @PathVariable clientID: String
     ) = appointmentService.retrieveAppointment(clientID)
+
+    @GetMapping(value = ["getAppointment/{appointmentID}"])
+    @ApiOperation(value = "get appointments by Appointment ID")
+    fun retrieveAppointmentByID(
+        @PathVariable appointmentID: String
+    ) = appointmentService.retrieveAppointmentByID(appointmentID)
 
 }
