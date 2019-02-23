@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.*
 
 @Api
 @RestController
-@RequestMapping("clients", produces = ["application/json"])
+@RequestMapping("/clients", produces = ["application/json"])
 class ClientController(@Autowired private val clientService: ClientService) {
-    @GetMapping(value = ["{clientID}"])
-    @ApiOperation(value = "get client")
+    @GetMapping("/{clientID}")
+    @ApiOperation("get client")
     fun retrieveClient(
         @PathVariable clientID: String
     ) = clientService.retrieveClientByID(clientID)
 
-    @PostMapping(value = ["{clientID}"])
-    @ApiOperation(value = "check in")
+    @PostMapping("/{clientID}/check-in")
+    @ApiOperation("check in")
     fun checkIn(
         @PathVariable clientID: String,
         @RequestParam latitude: Double,

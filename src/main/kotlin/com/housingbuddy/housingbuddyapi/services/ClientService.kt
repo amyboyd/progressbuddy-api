@@ -23,7 +23,7 @@ class ClientService(@Autowired private val mongoTemplate: MongoTemplate) {
         return client
     }
 
-    fun checkIn(clientID: String, latitude: Double, longitude: Double) {
+    fun checkIn(clientID: String, latitude: Double, longitude: Double): Client {
         var descriptionOptions: List<String> = mutableListOf(
             "Oldham Way, Manchester",
             "Northern Quarter, Manchester",
@@ -40,6 +40,8 @@ class ClientService(@Autowired private val mongoTemplate: MongoTemplate) {
                 .currentDate("lastCheckedInAt"),
             Client::class.java
         )
+
+        return retrieveClientByID(clientID)!!
     }
 
     private companion object {
