@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class CoachController {
 
-	@Autowired lateinit var coachService: CoachService
+	@Autowired private lateinit var coachService: CoachService
 
 }

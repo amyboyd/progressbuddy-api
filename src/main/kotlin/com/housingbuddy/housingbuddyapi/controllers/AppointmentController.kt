@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class AppointmentController {
 
-	@Autowired lateinit var appointmentService: AppointmentService
+	@Autowired private lateinit var appointmentService: AppointmentService
 
 }
