@@ -21,6 +21,9 @@ const clientClaire = {
 	address: 'Depaul Oldham',
 	coach: new DBRef('coaches', coachBobID),
 	appointments: [new DBRef('appointments', apptClaireDoctor._id)]
+	lastCheckedInAt: new ISODate(),
+	lastCheckedInLatitude: 53.5410104,
+	lastCheckedInLongitude: -2.1096368,
 };
 db.clients.insert(clientClaire);
 
