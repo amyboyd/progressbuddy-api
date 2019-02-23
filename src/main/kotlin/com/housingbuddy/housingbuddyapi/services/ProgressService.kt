@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.stereotype.Service
 
 @Service
-class ProgressService (@Autowired private val mongoTemplate: MongoTemplate) {
+class ProgressService(@Autowired private val mongoTemplate: MongoTemplate) {
 }

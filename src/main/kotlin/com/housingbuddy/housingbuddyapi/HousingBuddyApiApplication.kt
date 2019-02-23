@@ -7,6 +7,6 @@ import org.springframework.boot.runApplication
 class HousingBuddyApiApplication
 
 fun main(args: Array<String>) {
-	runApplication<HousingBuddyApiApplication>(*args)
+    runApplication<HousingBuddyApiApplication>(*args)
 }
 
