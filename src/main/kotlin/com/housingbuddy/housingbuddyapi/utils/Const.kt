@@ -1,7 +1,7 @@
 package com.housingbuddy.housingbuddyapi.utils
 
 object Const {
-	const val ID = "_id"
+    const val ID = "_id"
 }
 
 object Collections {
@@ -13,32 +13,32 @@ object Collections {
 }
 
 object ClientFields {
-	const val NAME = "name"
-	const val EMAIL = "email"
-	const val PASSWORD = "password"
-	const val PHONE = "phone"
-	const val ADDRESS = "address"
+    const val NAME = "name"
+    const val EMAIL = "email"
+    const val PASSWORD = "password"
+    const val PHONE = "phone"
+    const val ADDRESS = "address"
 }
 
 object CoachFields {
-	const val NAME = "name"
-	const val EMAIL = "email"
-	const val PASSWORD = "password"
-	const val BIO = "bio"
-	const val JOB_TITLE = "jobTitle"
-	const val PHOTO = "photo"
+    const val NAME = "name"
+    const val EMAIL = "email"
+    const val PASSWORD = "password"
+    const val BIO = "bio"
+    const val JOB_TITLE = "jobTitle"
+    const val PHOTO = "photo"
 }
 
 object AppointmentFields {
-	const val TITLE = "title"
-	const val DURATION_MINUTES = "durationMinutes"
-	const val DATE_TIME = "dateTime"
-	const val NOTES = "notes"
-	const val ATTENDED = "attended"
-	const val REASON_FOR_NOT_ATTENDING = "reasonForNotAttending"
-	const val APPOINTMENT_TYPE = "appointmentType"
-	const val APPOINTMENT_STATUS = "appointmentStatus"
-	const val APPOINTMENT_PRIORITY = "appointmentPriority"
+    const val TITLE = "title"
+    const val DURATION_MINUTES = "durationMinutes"
+    const val DATE_TIME = "dateTime"
+    const val NOTES = "notes"
+    const val ATTENDED = "attended"
+    const val REASON_FOR_NOT_ATTENDING = "reasonForNotAttending"
+    const val APPOINTMENT_TYPE = "appointmentType"
+    const val APPOINTMENT_STATUS = "appointmentStatus"
+    const val APPOINTMENT_PRIORITY = "appointmentPriority"
 }
 
 //object ProgressFields {
