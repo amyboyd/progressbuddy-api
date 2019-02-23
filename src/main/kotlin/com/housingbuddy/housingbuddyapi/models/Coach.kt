@@ -1,5 +1,6 @@
 package com.housingbuddy.housingbuddyapi.models
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.housingbuddy.housingbuddyapi.utils.Collections
 import io.swagger.annotations.ApiModel
@@ -22,7 +23,5 @@ data class Coach(
     var jobTitle: String,
     var photo: String? = "",
     @DBRef
-    var clients: List<Client?> = mutableListOf(),
-    @DBRef
-	var events: List<Event?> = mutableListOf()
+    var clients: List<Client?> = mutableListOf()
 )

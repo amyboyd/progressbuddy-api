@@ -1,5 +1,6 @@
 package com.housingbuddy.housingbuddyapi.models
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.housingbuddy.housingbuddyapi.utils.Collections
 import io.swagger.annotations.ApiModel
@@ -24,10 +25,13 @@ data class Client(
     var lastCheckedInLatitude: Double?,
     var lastCheckedInLongitude: Double?,
     var lastCheckedInDescription: String?,
-    @DBRef
-    var coach: Coach? = null,
-    @DBRef
+//    @DBRef(lazy = true)
+//    @JsonIgnore
+//    var coach: Coach? = null,
+    @DBRef(lazy = true)
     var appointments: List<Appointment?> = mutableListOf(),
-    @DBRef
-    var progress: Progress? = null
+    @DBRef(lazy = true)
+    var events: List<Event?> = mutableListOf(),
+    @DBRef(lazy = true)
+    var progress: List<Progress?> = mutableListOf()
 )

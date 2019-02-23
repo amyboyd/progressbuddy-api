@@ -12,8 +12,8 @@ data class User(
     @Indexed val id: ObjectId = ObjectId(),
     var email: String,
     var password: String,
-    @DBRef
+    @DBRef(lazy = true)
     var coach: Coach?,
-    @DBRef
+    @DBRef(lazy = true)
     var client: Client?
 )
