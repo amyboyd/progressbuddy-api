@@ -1,3 +1,4 @@
+const coachBobId = new ObjectId();
 
 const apptClaireDepaul = {
     // first is Depaul, 12pm Monday (i.e. 25th Feb). address: "123 Some Street, EC2A 4AB". description: "This is a one-on-one with your case-worker to discuss the changes since your last appointment and your next steps.
@@ -84,6 +85,7 @@ const clientClaire = {
     ],
     events: [new DBRef('events', claireEvent._id)],
     progress: [new DBRef('progress', claireProgress._id)],
+    coach: new DBRef('coaches', coachBobId),
 	lastCheckedInAt: new ISODate(),
 	lastCheckedInLatitude: 53.4851305,
 	lastCheckedInLongitude: -2.2401734,
@@ -92,7 +94,7 @@ const clientClaire = {
 db.clients.insert(clientClaire);
 
 const coachBob = {
-	_id: new ObjectId(),
+	_id: coachBobId,
 	name: 'Bob',
 	bio: 'Bob has been working with Depaul since 2012. He studied medicine at UCL and now is a Senior Progression Coach in our Oldham center.',
 	jobTitle: 'Senior Progression Coach',

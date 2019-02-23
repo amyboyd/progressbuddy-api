@@ -19,7 +19,8 @@ class ClientService(@Autowired private val mongoTemplate: MongoTemplate) {
     fun retrieveClientByID(clientID: String): Client? {
         LOGGER.info("Retrieving Client with ID: $clientID")
         val client = mongoTemplate.findById(ObjectId(clientID), Client::class.java, Collections.CLIENTS_COLLECTION)
-        LOGGER.info("Client Retrieved! Their ame is: ${client?.name}")
+        LOGGER.info("Client name is: ${client?.name}")
+        LOGGER.info("Coach name is: ${client?.coach?.name}")
         return client
     }
 
