@@ -20,10 +20,11 @@ const clientClaire = {
 	phone: '07123123123',
 	address: 'Depaul Oldham',
 	coach: new DBRef('coaches', coachBobID),
-	appointments: [new DBRef('appointments', apptClaireDoctor._id)]
+	appointments: [new DBRef('appointments', apptClaireDoctor._id)],
 	lastCheckedInAt: new ISODate(),
-	lastCheckedInLatitude: 53.5410104,
-	lastCheckedInLongitude: -2.1096368,
+	lastCheckedInLatitude: 53.4851305,
+	lastCheckedInLongitude: -2.2401734,
+	lastCheckedInDescription: 'Victoria Station, Manchester',
 };
 db.clients.insert(clientClaire);
 

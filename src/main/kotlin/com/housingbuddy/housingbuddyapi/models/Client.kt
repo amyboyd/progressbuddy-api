@@ -24,7 +24,8 @@ data class Client(
     var appointments: List<Appointment?> = mutableListOf(),
     var lastCheckedInAt: Date?,
     var lastCheckedInLatitude: Double?,
-    var lastCheckedInLongitude: Double?
+    var lastCheckedInLongitude: Double?,
+    var lastCheckedInDescription: String?
 //    @DBRef
 //    var progress: Progress? = null
 )

@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.Update
 import org.springframework.stereotype.Service
+import java.util.*
+
 
 @Service
 class ClientService(@Autowired private val mongoTemplate: MongoTemplate) {
@@ -22,10 +24,19 @@ class ClientService(@Autowired private val mongoTemplate: MongoTemplate) {
     }
 
     fun checkIn(clientID: String, latitude: Double, longitude: Double) {
+        var descriptionOptions: List<String> = mutableListOf(
+            "Oldham Way, Manchester",
+            "Northern Quarter, Manchester",
+            "Oxford Road, Manchester"
+        )
+
+        var description: String = descriptionOptions.get(Random().nextInt(descriptionOptions.size))
+
         mongoTemplate.updateFirst(
             Query.query(Criteria.where("_id").`is`(clientID)),
             Update.update("lastCheckedInLatitude", latitude)
                 .set("lastCheckedInLongitude", longitude)
+                .set("lastCheckedInDescription", description)
                 .currentDate("lastCheckedInAt"),
             Client::class.java
         )
