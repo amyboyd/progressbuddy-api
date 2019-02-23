@@ -1,12 +1,14 @@
 package com.housingbuddy.housingbuddyapi.models
 
 import com.housingbuddy.housingbuddyapi.utils.Collections
+import io.swagger.annotations.ApiModel
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
-import java.util.*
+import java.util.Date
 
+@ApiModel
 @Document(collection = Collections.APPOINTMENTS_COLLECTION)
 data class Appointment (
 	@Indexed
