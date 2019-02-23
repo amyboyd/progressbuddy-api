@@ -8,14 +8,16 @@ import java.util.*
 data class Appointment (
 	@Indexed
 	@Id
-	var appointmentID: String = ObjectId().toHexString(),
+	val appointmentID: String = ObjectId().toHexString(),
 	var title: String,
 	var duration: String,
 	var notes: String,
 	var dateTime: Date,
 	var attended: Boolean,
-	var reasonForNotAttending: String,
-	var appointmentStatus: AppointmentStatus
+	var reasonForNotAttending: String?,
+	var appointmentType: String,
+	var appointmentStatus: AppointmentStatus,
+	var appointmentPriority: AppointmentPriority
 )
 
 enum class AppointmentStatus {
@@ -24,5 +26,11 @@ enum class AppointmentStatus {
 	ATTENDED,
 	NOT_ATTENDED,
 	CANCELLED
+}
+
+enum class AppointmentPriority {
+	MANDATORY,
+	SUGGESTED,
+	OPTIONAL
 }
 

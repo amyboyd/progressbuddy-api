@@ -7,12 +7,13 @@ import org.springframework.data.mongodb.core.index.Indexed
 data class Coach (
 	@Indexed
 	@Id
-	var coachID: String = ObjectId().toHexString(),
+	val coachID: String = ObjectId().toHexString(),
 	var name: String,
 	var password: String,
 	var email: String,
 	var bio: String,
 	var specialities: String,
 	var jobTitle: String,
-	var photo: String
+	var photo: String,
+	var clientList: List<Client?>
 )

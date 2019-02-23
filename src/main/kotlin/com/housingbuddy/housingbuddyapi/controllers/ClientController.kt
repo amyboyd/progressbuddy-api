@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class ClientController {
+class ClientController (@Autowired private val clientService: ClientService) {
 
-	@Autowired private lateinit var clientService: ClientService
 
 }

@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class AppointmentController {
+class AppointmentController (@Autowired private val appointmentService: AppointmentService) {
 
-	@Autowired private lateinit var appointmentService: AppointmentService
 
 }

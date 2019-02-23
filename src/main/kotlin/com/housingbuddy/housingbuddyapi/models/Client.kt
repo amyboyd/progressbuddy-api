@@ -6,12 +6,13 @@ import org.springframework.data.mongodb.core.index.Indexed
 
 data class Client (
 	@Id
-	@Indexed var clientID: String = ObjectId().toHexString(),
-	@Indexed var progressID: String,
-	@Indexed var coachID: String,
-	var name: String,
-	var password: String,
-	var phone: String,
+	@Indexed val clientID: String = ObjectId().toHexString(),
 	var email: String,
-	var address: String
+	var password: String,
+	var name: String,
+	var phone: String,
+	var address: String,
+	var coach: Coach?, //potentially nullable
+	var appointments: List<Appointment?>,
+	var progress: Progress
 )
