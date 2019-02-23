@@ -1,5 +1,6 @@
 package com.housingbuddy.housingbuddyapi.controllers
 
+import com.housingbuddy.housingbuddyapi.models.ProgressType
 import com.housingbuddy.housingbuddyapi.services.ClientService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -28,6 +29,19 @@ class ClientController(@Autowired private val clientService: ClientService) {
         @PathVariable clientID: String
     ) = clientService.retrieveClientByID(clientID)?.progress
 
+    @GetMapping("/{clientID}/latestProgressScoresByTypes")
+    @ApiOperation("get client's latest progress scores by types")
+    fun getLatestProgressValuesByTypes(@PathVariable clientID: String): MutableMap<ProgressType, Int?> {
+        val client = clientService.retrieveClientByID(clientID)!!
+        val result: MutableMap<ProgressType, Int?> = mutableMapOf()
+        enumValues<ProgressType>().forEach {
+            val score = client.getLatestProgressScoreByType(it)
+            result.put(it, score)
+        }
+
+        return result
+    }
+
     @GetMapping("/{clientID}/appointments")
     @ApiOperation("get client appointments")
     fun retrieveClientAppointments(
@@ -39,11 +53,11 @@ class ClientController(@Autowired private val clientService: ClientService) {
     fun retrieveClientCheckInStatus(
         @PathVariable clientID: String
     ): LinkedHashMap<String, String> {
-        val lastCheckInTime =  clientService.retrieveClientByID(clientID)?.lastCheckedInAt
+        val lastCheckInTime = clientService.retrieveClientByID(clientID)?.lastCheckedInAt
         val lastLongitude = clientService.retrieveClientByID(clientID)?.lastCheckedInLongitude
         val lastCheckInDescription = clientService.retrieveClientByID(clientID)?.lastCheckedInDescription
 
-        return linkedMapOf (
+        return linkedMapOf(
             "lastCheckInTime" to lastCheckInTime.toString(),
             "lastLongitude" to lastLongitude.toString(),
             "lastCheckInDescription" to lastCheckInDescription.toString()

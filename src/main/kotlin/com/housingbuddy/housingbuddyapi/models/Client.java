@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.housingbuddy.housingbuddyapi.utils.Collections;
 import io.swagger.annotations.ApiModel;
+import lombok.NonNull;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -68,5 +69,27 @@ public class Client {
             progress = new ArrayList<>();
         }
         return progress;
+    }
+
+    @NonNull
+    public Progress getProgressByType(@NonNull ProgressType type) {
+        return getProgress()
+            .stream()
+            .filter(p -> p.getProgressType() == type)
+            .findFirst()
+            .orElse(new Progress(new ObjectId(), type, new ArrayList<>()));
+    }
+
+    public Integer getLatestProgressScoreByType(@NonNull ProgressType type) {
+        Progress progress = getProgressByType(type);
+
+        if (progress.getProgressHistoryList().isEmpty()) {
+            return null;
+        }
+
+        return progress
+            .getProgressHistoryList()
+            .get(progress.getProgressHistoryList().size() - 1)
+            .getScore();
     }
 }
