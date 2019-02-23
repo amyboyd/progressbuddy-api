@@ -63,7 +63,7 @@ const clientClaire = {
 	phone: '07123123123',
 	address: 'Depaul Oldham',
 	appointments: [
-	    new DBRef('appointments', apptClaireDoctor._id),
+	    new DBRef('appointments', apptClaireDepaul._id),
         new DBRef('appointments', apptClaireCityWest._id)
     ],
     events: [new DBRef('events', claireEvent._id)],
