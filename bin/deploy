@@ -6,14 +6,11 @@ set -o errexit
 set -o nounset
 
 server='hackathon'
+supervisor_job='api'
 
 mvn package -Dmaven.test.skip=true
 
 scp target/housingbuddy-api-0.0.1-SNAPSHOT.jar $server:api.jar
-
-rm -fr target/
-
-supervisor_job='api'
 
 echo "Restarting supervisor job $supervisor_job"
 ssh $server "sudo supervisorctl restart $supervisor_job"
