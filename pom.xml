@@ -11,7 +11,7 @@
 	<groupId>com.housingbuddy</groupId>
 	<artifactId>housingbuddy-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>housingbuddy-api</name>
 	<description>API for HousingBuddy App</description>
 
