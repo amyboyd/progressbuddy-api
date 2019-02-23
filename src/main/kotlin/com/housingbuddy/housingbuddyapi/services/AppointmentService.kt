@@ -1,7 +1,6 @@
 package com.housingbuddy.housingbuddyapi.services
 
 import com.housingbuddy.housingbuddyapi.models.Appointment
-import com.housingbuddy.housingbuddyapi.models.AppointmentStatus
 import com.housingbuddy.housingbuddyapi.utils.Collections
 import com.housingbuddy.housingbuddyapi.utils.Const
 import org.bson.types.ObjectId
@@ -33,7 +32,7 @@ class AppointmentService(
         return appt
     }
 
-    fun updateAttendanceStatus(appointmentID: String, status: AppointmentStatus, notAttendingReason: String?) {
+    fun updateAttendanceStatus(appointmentID: String, status: Appointment.Status, notAttendingReason: String?) {
         val updateQuery = Query().addCriteria(Criteria.where(Const.ID).`is`(appointmentID))
         val update = Update().set("appointmentStatus", status)
         notAttendingReason?.let {

@@ -1,6 +1,6 @@
 package com.housingbuddy.housingbuddyapi.controllers
 
-import com.housingbuddy.housingbuddyapi.models.AppointmentStatus
+import com.housingbuddy.housingbuddyapi.models.Appointment
 import com.housingbuddy.housingbuddyapi.services.AppointmentService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -28,7 +28,7 @@ class AppointmentController(@Autowired private val appointmentService: Appointme
     @ApiOperation(value = "confirm attendance  for appointment ")
     fun confirmAppointmentAttendance(
         @PathVariable appointmentID: String,
-        @RequestParam(required = true, name = "appointmentStatus") appointmenStatus: AppointmentStatus,
+        @RequestParam(required = true, name = "appointmentStatus") appointmenStatus: Appointment.Status,
         @RequestParam(required = false, name = "reasonForNotAttending") reasonForNotAttending: String?
     ) = appointmentService.updateAttendanceStatus(appointmentID = appointmentID, status = appointmenStatus, notAttendingReason = reasonForNotAttending)
 
