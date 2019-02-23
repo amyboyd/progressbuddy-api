@@ -11,7 +11,7 @@
 //@ConditionalOnWebApplication
 //class WebConfig : WebMvcConfigurer {
 //
-//	override fun configureContentNegotiation(configurer: ContentNegotiationConfigurer) {
-//		configurer.ignoreAcceptHeader(true)
-//	}
+//     override fun configureContentNegotiation(configurer: ContentNegotiationConfigurer) {
+//          configurer.ignoreAcceptHeader(true)
+//     }
 //}

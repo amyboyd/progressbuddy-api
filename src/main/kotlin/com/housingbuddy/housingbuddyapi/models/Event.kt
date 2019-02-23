@@ -14,11 +14,11 @@ import java.util.*
 @ApiModel
 @Document(collection = Collections.EVENTS_COLLECTION)
 data class Event (
-	@Indexed
-	@Id
-	val eventID: ObjectId = ObjectId(),
-	var name: String,
-	var date: Date,
-	var title: String,
-	var bodyText: String
+    @Indexed
+    @Id
+    val eventID: ObjectId = ObjectId(),
+    var name: String,
+    var date: Date,
+    var title: String,
+    var bodyText: String
 )

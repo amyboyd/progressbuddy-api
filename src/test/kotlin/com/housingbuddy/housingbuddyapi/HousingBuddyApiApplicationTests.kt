@@ -10,17 +10,13 @@ import org.springframework.test.context.junit4.SpringRunner
 @RunWith(SpringRunner::class)
 @SpringBootTest
 class HousingBuddyApiApplicationTests {
+    @Autowired
+    lateinit var clientService: ClientService
 
-	@Autowired
-	lateinit var clientService: ClientService
+    @Test
+    fun contextLoads() {
+    }
 
-	@Test
-	fun contextLoads() {
-	}
-
-	fun housingServiceGeneralTests() {
-
-	}
-
+    fun housingServiceGeneralTests() {
+    }
 }
-

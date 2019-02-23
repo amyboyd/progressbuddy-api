@@ -1,17 +1,17 @@
 const coachBobId = new ObjectId();
 
 const apptClaireDepaul = {
-	_id: new ObjectId(),
-	title: "Depaul One-On-One",
-	durationMinutes: 60,
-	dateTime: new ISODate("2019-02-25T12:00:00Z"),
-	notes: "34 Decima Street, SE1 4QQ\n\nThis is a one-on-one with your case-worker to discuss the changes since your last appointment and your next steps.",
-	attended: false,
+    _id: new ObjectId(),
+    title: "Depaul One-On-One",
+    durationMinutes: 60,
+    dateTime: new ISODate("2019-02-25T12:00:00Z"),
+    notes: "34 Decima Street, SE1 4QQ\n\nThis is a one-on-one with your case-worker to discuss the changes since your last appointment and your next steps.",
+    attended: false,
     imageURL: "https://s3.eu-west-2.amazonaws.com/faultfixers-misc/hackathon/depaul-logo.png",
-	reasonForNotAttending:  "Claire was too sick",
-	appointmentType: "Depaul Coaching",
-	appointmentStatus: "NOT_SET",
-	appointmentPriority: "MANDATORY"
+    reasonForNotAttending:  "Claire was too sick",
+    appointmentType: "Depaul Coaching",
+    appointmentStatus: "NOT_SET",
+    appointmentPriority: "MANDATORY"
 };
 db.appointments.insert(apptClaireDepaul);
 
@@ -46,29 +46,29 @@ const apptClaireDoctors = {
 db.appointments.insert(apptClaireDoctors);
 
 const claireProgress = {
-	_id: new ObjectId(),
-	type: 'MOTIVATION_AND_RESPONSIBILITY',
-	history: [
-		{
-			date: new ISODate('2019-01-07T11:48:00Z'),
-			score: 5,
-			comment: 'I am lazy',
-		},
-		{
-			date: new ISODate('2019-01-01T10:00:00Z'),
-			score: 2,
-			comment: 'I am REALLY lazy',
-		},
-	]
+    _id: new ObjectId(),
+    type: 'MOTIVATION_AND_RESPONSIBILITY',
+    history: [
+        {
+            date: new ISODate('2019-01-07T11:48:00Z'),
+            score: 5,
+            comment: 'I am lazy',
+        },
+        {
+            date: new ISODate('2019-01-01T10:00:00Z'),
+            score: 2,
+            comment: 'I am REALLY lazy',
+        },
+    ]
 };
 db.progress.insert(claireProgress);
 
 const claireEvent = {
-	_id: new ObjectId(),
-	name: "Checkin Event",
-	title: "Claire updated her location!",
-	bodyText: "Claire has just checked in and updated her current location. Please see if this matches up with her appointments.",
-	date: new ISODate()
+    _id: new ObjectId(),
+    name: "Checkin Event",
+    title: "Claire updated her location!",
+    bodyText: "Claire has just checked in and updated her current location. Please see if this matches up with her appointments.",
+    date: new ISODate()
 };
 db.events.insert(claireEvent);
 
@@ -93,30 +93,30 @@ const clientClaire = {
 db.clients.insert(clientClaire);
 
 const clientDan = {
-	_id: new ObjectId(),
-	name: 'Dan',
-	phone: '07444555666',
-	address: 'Depaul East London',
-	appointments: [
+    _id: new ObjectId(),
+    name: 'Dan',
+    phone: '07444555666',
+    address: 'Depaul East London',
+    appointments: [
     ],
     events: [],
     progress: [],
     coach: new DBRef('coaches', coachBobId),
-	lastCheckedInAt: new ISODate(),
-	lastCheckedInLatitude: 51.5,
-	lastCheckedInLongitude: -0.08,
-	lastCheckedInDescription: 'Shoreditch High Street, London',
+    lastCheckedInAt: new ISODate(),
+    lastCheckedInLatitude: 51.5,
+    lastCheckedInLongitude: -0.08,
+    lastCheckedInDescription: 'Shoreditch High Street, London',
 };
 db.clients.insert(clientDan);
 
 const coachBob = {
-	_id: coachBobId,
-	name: 'Bob',
-	bio: 'Bob has been working with Depaul since 2012. He studied medicine at UCL and now is a Senior Progression Coach in our Oldham center.',
-	jobTitle: 'Senior Progression Coach',
-	specialities : "Mental wellbeing",
-	photo: '@todo',
-	clients: [
+    _id: coachBobId,
+    name: 'Bob',
+    bio: 'Bob has been working with Depaul since 2012. He studied medicine at UCL and now is a Senior Progression Coach in our Oldham center.',
+    jobTitle: 'Senior Progression Coach',
+    specialities : "Mental wellbeing",
+    photo: '@todo',
+    clients: [
         new DBRef('clients', clientClaire._id),
         new DBRef('clients', clientDan._id),
     ]
@@ -124,9 +124,9 @@ const coachBob = {
 db.coaches.insert(coachBob);
 
 db.users.insert({
-	email: 'coach-bob@example.com',
-	password: 'pass1234',
-	coach: new DBRef('coaches', coachBob._id),
+    email: 'coach-bob@example.com',
+    password: 'pass1234',
+    coach: new DBRef('coaches', coachBob._id),
 });
 
 db.users.insert({
@@ -136,7 +136,7 @@ db.users.insert({
 });
 
 db.users.insert({
-	email: 'client-dan@example.com',
-	password: 'pass1234',
-	client: new DBRef('clients', clientDan._id),
+    email: 'client-dan@example.com',
+    password: 'pass1234',
+    client: new DBRef('clients', clientDan._id),
 });
