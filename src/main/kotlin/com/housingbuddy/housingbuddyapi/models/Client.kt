@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
+import java.util.*
 
 @ApiModel
 @Document(collection = Collections.CLIENTS_COLLECTION)
@@ -19,10 +20,10 @@ data class Client(
     var name: String,
     var phone: String,
     var address: String,
-    var lastCheckedInAt: String,
-    var lastCheckedInDescription: String,
-    var lastCheckedInLatitude: String,
-    var lastCheckedInLongitude: String,
+    var lastCheckedInAt: Date?,
+    var lastCheckedInLatitude: Double?,
+    var lastCheckedInLongitude: Double?,
+    var lastCheckedInDescription: String?,
     @DBRef
     var coach: Coach? = null,
     @DBRef

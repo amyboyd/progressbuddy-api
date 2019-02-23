@@ -8,9 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @ApiModel
 @Document(collection = "organizations")
-data class Organization (
-	@Indexed
-	@Id
-	val organizationID: ObjectId = ObjectId(),
-	var photo: String
+data class Organization(
+    @Indexed
+    @Id
+    val organizationID: ObjectId = ObjectId(),
+    var photo: String
 )
