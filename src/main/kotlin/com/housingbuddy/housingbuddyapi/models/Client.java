@@ -72,24 +72,24 @@ public class Client {
     }
 
     @NonNull
-    public Progress getProgressByType(@NonNull ProgressType type) {
+    public Progress getProgressByType(@NonNull Progress.Type type) {
         return getProgress()
             .stream()
-            .filter(p -> p.getProgressType() == type)
+            .filter(p -> p.type == type)
             .findFirst()
-            .orElse(new Progress(new ObjectId(), type, new ArrayList<>()));
+            .orElse(new Progress());
     }
 
-    public Integer getLatestProgressScoreByType(@NonNull ProgressType type) {
+    public Integer getLatestProgressScoreByType(@NonNull Progress.Type type) {
         Progress progress = getProgressByType(type);
 
-        if (progress.getProgressHistoryList().isEmpty()) {
+        if (progress.getHistory().isEmpty()) {
             return null;
         }
 
         return progress
-            .getProgressHistoryList()
-            .get(progress.getProgressHistoryList().size() - 1)
-            .getScore();
+            .getHistory()
+            .get(progress.getHistory().size() - 1)
+            .score;
     }
 }

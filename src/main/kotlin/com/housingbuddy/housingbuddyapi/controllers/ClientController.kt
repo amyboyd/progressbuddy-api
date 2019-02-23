@@ -1,6 +1,6 @@
 package com.housingbuddy.housingbuddyapi.controllers
 
-import com.housingbuddy.housingbuddyapi.models.ProgressType
+import com.housingbuddy.housingbuddyapi.models.Progress
 import com.housingbuddy.housingbuddyapi.services.ClientService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -31,10 +31,10 @@ class ClientController(@Autowired private val clientService: ClientService) {
 
     @GetMapping("/{clientID}/latestProgressScoresByTypes")
     @ApiOperation("get client's latest progress scores by types")
-    fun getLatestProgressValuesByTypes(@PathVariable clientID: String): MutableMap<ProgressType, Int?> {
+    fun getLatestProgressValuesByTypes(@PathVariable clientID: String): MutableMap<Progress.Type, Int?> {
         val client = clientService.retrieveClientByID(clientID)!!
-        val result: MutableMap<ProgressType, Int?> = mutableMapOf()
-        enumValues<ProgressType>().forEach {
+        val result: MutableMap<Progress.Type, Int?> = mutableMapOf()
+        enumValues<Progress.Type>().forEach {
             val score = client.getLatestProgressScoreByType(it)
             result.put(it, score)
         }
