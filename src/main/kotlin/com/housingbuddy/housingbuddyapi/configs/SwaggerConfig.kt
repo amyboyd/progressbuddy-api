@@ -14,7 +14,6 @@ class SwaggerConfig {
 	@Bean
 	fun api(): Docket {
 		return Docket(DocumentationType.SWAGGER_2)
-			.protocols(setOf("http", "https"))
 			.select()
 			.apis(RequestHandlerSelectors.any())
 			.build()

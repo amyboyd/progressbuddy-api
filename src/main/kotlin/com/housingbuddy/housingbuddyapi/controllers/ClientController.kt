@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @Api
 @RestController
-@RequestMapping("clients")
+@RequestMapping("clients" , produces = ["application/json"])
 class ClientController(@Autowired private val clientService: ClientService) {
-    @GetMapping(value = ["{id}"])
+    @GetMapping(value = ["{clientID}"])
     @ApiOperation(value = "get client")
     fun retrieveClient(
-        @ApiParam(value = "clientID")
         @PathVariable clientID: String
     ) = clientService.retrieveClientByID(clientID)
 }
