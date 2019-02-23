@@ -25,13 +25,13 @@ class ClientService(@Autowired private val mongoTemplate: MongoTemplate) {
     }
 
     fun checkIn(clientID: String, latitude: Double, longitude: Double): Client {
-        var descriptionOptions: List<String> = mutableListOf(
+        val descriptionOptions: List<String> = mutableListOf(
             "Oldham Way, Manchester",
             "Northern Quarter, Manchester",
             "Oxford Road, Manchester"
         )
 
-        var description: String = descriptionOptions.get(Random().nextInt(descriptionOptions.size))
+        val description: String = descriptionOptions.get(Random().nextInt(descriptionOptions.size))
 
         mongoTemplate.updateFirst(
             Query.query(Criteria.where("_id").`is`(clientID)),
