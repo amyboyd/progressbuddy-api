@@ -5,10 +5,10 @@ object Const {
 }
 
 object Collections {
-	const val CLIENT_COLLECTION = "clientCollection"
+	const val CLIENTS_COLLECTION = "clientsCollection"
 	const val PROGRESS_COLLECTION = "progressCollection"
-	const val COACH_COLLECTION = "coachCollection"
-	const val APPOINTMENT_COLLECTION = "appointmentCollection"
+	const val COACHES_COLLECTION = "coachesCollection"
+	const val APPOINTMENTS_COLLECTION = "appointmentsCollection"
 }
 
 object ClientFields {

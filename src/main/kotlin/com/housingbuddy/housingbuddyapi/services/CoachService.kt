@@ -22,7 +22,7 @@ class CoachService (@Autowired private val mongoTemplate: MongoTemplate) {
 
 	fun retrieveCoachInfo(coachID: String): MutableList<Coach> {
 		val query = Query(Criteria(Const.ID).`is`(coachID))
-		return mongoTemplate.find(query, Coach::class.java, Collections.COACH_COLLECTION)
+		return mongoTemplate.find(query, Coach::class.java, Collections.COACHES_COLLECTION)
 	}
 
 }

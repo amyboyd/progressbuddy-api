@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Query
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
-import sun.security.x509.CRLDistributionPointsExtension.POINTS
 
 @Service
 class ClientService (@Autowired private val mongoTemplate: MongoTemplate) {
@@ -26,13 +25,13 @@ class ClientService (@Autowired private val mongoTemplate: MongoTemplate) {
 					Criteria.where(ClientFields.EMAIL).`is`(client.email)
 				)
 			)
-		return if (mongoTemplate.count(verifyQuery, Collections.CLIENT_COLLECTION) > 0) {
+		return if (mongoTemplate.count(verifyQuery, Collections.CLIENTS_COLLECTION) > 0) {
 			LOGGER.info("Client with name: ${client.name} and email: ${client.email} already exists")
 			ResponseEntity(HttpStatus.CONFLICT)
 		}
 		else {
 			return try {
-				mongoTemplate.insert(client, Collections.CLIENT_COLLECTION)
+				mongoTemplate.insert(client, Collections.CLIENTS_COLLECTION)
 				LOGGER.info("Successfully inserted new client: ${client.clientID}")
 				ResponseEntity(HttpStatus.OK)
 			} catch (exception: Exception) {
@@ -54,7 +53,7 @@ class ClientService (@Autowired private val mongoTemplate: MongoTemplate) {
 			.include(Const.ID).include(ClientFields.NAME).include(ClientFields.EMAIL).include(ClientFields.PASSWORD)
 			.include(ClientFields.PHONE).include(ClientFields.ADDRESS)
 
-		return mongoTemplate.findOne(query, Client::class.java, Collections.CLIENT_COLLECTION)
+		return mongoTemplate.findOne(query, Client::class.java, Collections.CLIENTS_COLLECTION)
 	}
 
 	fun retrieveClientByID(clientID: String): Client? {
@@ -64,7 +63,7 @@ class ClientService (@Autowired private val mongoTemplate: MongoTemplate) {
 			.include(Const.ID).include(ClientFields.NAME).include(ClientFields.EMAIL).include(ClientFields.PASSWORD)
 			.include(ClientFields.PHONE).include(ClientFields.ADDRESS)
 
-		return mongoTemplate.findOne(query, Client::class.java, Collections.CLIENT_COLLECTION)
+		return mongoTemplate.findOne(query, Client::class.java, Collections.CLIENTS_COLLECTION)
 	}
 
 	private companion object {
