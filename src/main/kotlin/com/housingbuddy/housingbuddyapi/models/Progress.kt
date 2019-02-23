@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.index.Indexed
 data class Progress (
 	@Indexed
 	@Id
-	val progressID: String = ObjectId().toHexString(),
+	val progressID: ObjectId = ObjectId(),
 	var motivationAndResponsibility: String,
 	var moneyManagement: String,
 	var relationships: String,

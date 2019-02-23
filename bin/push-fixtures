@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Usage: bin/push-fixtures
+
+set -o errexit
+
+db='hackathon'
+server='hackathon'
+
+mongo $db --eval 'db.dropDatabase()'
+
+mongo $db bin/fixtures.js
+
+echo "Finished loading fixtures into database $db"
+
+mongodump -d $db -o db-dump --gzip
+ssh "$server" 'rm -fr db-dump/'
+ssh "$server" "mongo $db --eval 'db.dropDatabase()'"
+echo 'Uploading mongodump files'
+rsync -raz db-dump/ $server:db-dump/
+ssh "$server" "mongorestore --drop -d $db --gzip db-dump/$db/"
+rm -fr db-dump
+ssh "$server" "rm -fr db-dump"
+
+echo "Pushed database fixtures to server: $server"

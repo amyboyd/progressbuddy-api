@@ -8,7 +8,7 @@ import java.util.*
 data class Appointment (
 	@Indexed
 	@Id
-	val appointmentID: String = ObjectId().toHexString(),
+	val appointmentID: ObjectId = ObjectId(),
 	var title: String,
 	var durationMinutes: Int,
 	var dateTime: Date,

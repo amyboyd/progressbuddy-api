@@ -10,19 +10,9 @@ import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Service
 
 @Service
-class CoachService (@Autowired private val mongoTemplate: MongoTemplate) {
-
-	fun registerCoach() {
-
-	}
-
-	fun loginCoach() {
-
-	}
-
-	fun retrieveCoachInfo(coachID: String): MutableList<Coach> {
-		val query = Query(Criteria(Const.ID).`is`(coachID))
-		return mongoTemplate.find(query, Coach::class.java, Collections.COACHES_COLLECTION)
-	}
-
+class CoachService(@Autowired private val mongoTemplate: MongoTemplate) {
+    fun retrieveCoachInfo(coachID: String): MutableList<Coach> {
+        val query = Query(Criteria(Const.ID).`is`(coachID))
+        return mongoTemplate.find(query, Coach::class.java, Collections.COACHES_COLLECTION)
+    }
 }
