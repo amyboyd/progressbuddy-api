@@ -1,0 +1,57 @@
+# This is for the Java API servers.
+
+# AWS instances should be Ubuntu 18.04, minimum 1 GB RAM, in London region.
+# Then begin by SSHing into the new VM, with: ssh ubuntu@[ip]
+
+sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y
+sudo reboot
+
+sudo -i
+
+# Now as root:
+
+apt install -y landscape-common
+
+mkdir /var/log/hackathon
+chmod a+rw /var/log/hackathon
+
+# Java.
+# This isn't a simple apt install for the reasons documented here: https://dzone.com/articles/installing-openjdk-11-on-ubuntu-1804-for-real
+# (tl;dr: openjdk-11-jre installs JRE 10, not 11)
+wget https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -O /tmp/openjdk-11+28_linux-x64_bin.tar.gz
+mkdir /usr/lib/jvm
+tar xfvz /tmp/openjdk-11+28_linux-x64_bin.tar.gz --directory /usr/lib/jvm
+rm -f /tmp/openjdk-11+28_linux-x64_bin.tar.gz
+mv /usr/lib/jvm/jdk-11.0.2 /usr/lib/jvm/jdk-11
+sudo sh -c 'for bin in /usr/lib/jvm/jdk-11/bin/*; do update-alternatives --install /usr/bin/$(basename $bin) $(basename $bin) $bin 100; done'
+sudo sh -c 'for bin in /usr/lib/jvm/jdk-11/bin/*; do update-alternatives --set $(basename $bin) $bin; done'
+
+# Supervisor.
+apt install -y supervisor
+nano /etc/supervisor/conf.d/hackathon.conf
+# Add content from supervisor.conf (change the max Java memory depending on the server memory)
+service supervisor restart
+
+# MongoDB
+apt install -y mongodb
+
+# Letsencrypt + generate certs.
+# Before following these steps, ensure the DNS records for each host have already been set up.
+apt install -y letsencrypt
+letsencrypt certonly -d hackathon-api.faultfixers.com --standalone
+
+# Nginx.
+apt install -y nginx
+rm /etc/nginx/sites-enabled/default
+nano /etc/nginx/sites-enabled/hackathon.conf
+# Fill in content from nginx.conf
+nginx -t
+service nginx restart
+# Test that serving and logging works as expected.
+
+# On dev/staging, set up extra swap memory.
+# On prod, make sure there is enough real memory to load heaviest endpoints.
+
+# Ensure timezone is Etc/UTC (cat /etc/timezone)
