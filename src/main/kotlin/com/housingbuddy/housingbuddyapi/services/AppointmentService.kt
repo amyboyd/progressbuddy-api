@@ -1,12 +1,17 @@
 package com.housingbuddy.housingbuddyapi.services
 
 import com.housingbuddy.housingbuddyapi.models.Appointment
+import com.housingbuddy.housingbuddyapi.models.AppointmentStatus
 import com.housingbuddy.housingbuddyapi.utils.Collections
+import com.housingbuddy.housingbuddyapi.utils.Const
 import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Query
+import org.springframework.data.mongodb.core.query.Update
 import org.springframework.stereotype.Service
 
 @Service
@@ -19,7 +24,7 @@ class AppointmentService(
 
     }
 
-    fun retrieveAppointment(clientID: String) = clientService.retrieveClientByID(clientID)?.appointments
+    fun retrieveAppointmentByClientID(clientID: String) = clientService.retrieveClientByID(clientID)?.appointments
 
     fun retrieveAppointmentByID(clientID: String): Appointment? {
         LOGGER.info("Retrieving Client with ID: $clientID")
@@ -28,9 +33,17 @@ class AppointmentService(
         return appt
     }
 
-
-    fun updateAppointment(appointmentID: String) {
-
+    fun updateAttendanceStatus(appointmentID: String, status: AppointmentStatus, notAttendingReason: String?) {
+        val updateQuery = Query().addCriteria(Criteria.where(Const.ID).`is`(appointmentID))
+        val update = Update().set("appointmentStatus", status)
+        notAttendingReason?.let {
+            update.set("reasonForNotAttending", notAttendingReason)
+        }
+        val result = mongoTemplate.updateFirst(updateQuery, update, Collections.APPOINTMENTS_COLLECTION)
+        if (result.wasAcknowledged()) {
+            LOGGER.info("Updated Appointment status to $status")
+        } else
+            LOGGER.warn("Failed to update appointment status")
     }
 
     private companion object {
