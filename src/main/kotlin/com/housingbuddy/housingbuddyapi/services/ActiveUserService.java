@@ -31,7 +31,7 @@ public class ActiveUserService {
 
         Set<GrantedAuthority> grantedAuthorities = getGrantedAuthorities(user);
 
-        Authentication token = new UsernamePasswordAuthenticationToken(user, user.getPassword(), grantedAuthorities);
+        Authentication token = new UsernamePasswordAuthenticationToken(user, user.password, grantedAuthorities);
 
         // Let Spring know the user is authenticated.
         setAuthentication(token);

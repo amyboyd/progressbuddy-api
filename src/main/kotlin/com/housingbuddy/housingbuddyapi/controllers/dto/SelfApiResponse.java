@@ -18,7 +18,7 @@ public class SelfApiResponse {
 
     public SelfApiResponse(@NonNull User user) {
         this.user = user;
-        this.coach = user.getCoach();
-        this.client = user.getClient();
+        this.coach = user.coach;
+        this.client = user.client;
     }
 }
