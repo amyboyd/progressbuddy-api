@@ -12,7 +12,7 @@ data class Client (
 	var name: String,
 	var phone: String,
 	var address: String,
-	var coach: Coach?, //potentially nullable
-	var appointments: List<Appointment?>,
-	var progress: Progress
+	var coach: Coach? = null, //potentially nullable
+	var appointments: List<Appointment?> = mutableListOf(),
+	var progress: Progress? = null
 )

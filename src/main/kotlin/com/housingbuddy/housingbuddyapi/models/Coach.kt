@@ -14,6 +14,6 @@ data class Coach (
 	var bio: String,
 	var specialities: String,
 	var jobTitle: String,
-	var photo: String,
-	var clientList: List<Client?>
+	var photo: String? = "",
+	var clientList: List<Client?> = mutableListOf()
 )

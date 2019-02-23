@@ -10,9 +10,9 @@ data class Appointment (
 	@Id
 	val appointmentID: String = ObjectId().toHexString(),
 	var title: String,
-	var duration: String,
-	var notes: String,
+	var durationMinutes: Int,
 	var dateTime: Date,
+	var notes: String,
 	var attended: Boolean,
 	var reasonForNotAttending: String?,
 	var appointmentType: String,
