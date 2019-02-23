@@ -45,23 +45,85 @@ const apptClaireDoctors = {
 };
 db.appointments.insert(apptClaireDoctors);
 
-const claireProgress = {
+const claireProgressForMotivationAndResponsibility = {
     _id: new ObjectId(),
     type: 'MOTIVATION_AND_RESPONSIBILITY',
     history: [
         {
-            date: new ISODate('2019-01-07T11:48:00Z'),
+            date: new ISODate('2019-01-01T11:48:00Z'),
             score: 5,
             comment: 'I am lazy',
         },
         {
-            date: new ISODate('2019-01-01T10:00:00Z'),
+            date: new ISODate('2019-01-02T10:00:00Z'),
             score: 2,
             comment: 'I am REALLY lazy',
         },
-    ]
+    ],
 };
-db.progress.insert(claireProgress);
+db.progress.insert(claireProgressForMotivationAndResponsibility);
+
+const claireProgressForDrugAndAlcoholMisuse = {
+    _id: new ObjectId(),
+    type: 'DRUGS_AND_ALCOHOL',
+    history: [
+        {
+            date: new ISODate('2019-01-01T11:48:00Z'),
+            score: 2,
+            comment: 'I got drunk every day this week',
+        },
+        {
+            date: new ISODate('2019-01-10T10:00:00Z'),
+            score: 7,
+            comment: 'I\'m 2 days sober',
+        },
+    ],
+};
+db.progress.insert(claireProgressForDrugAndAlcoholMisuse);
+
+const claireProgressForSelfCareAndLivingSkills = {
+    _id: new ObjectId(),
+    type: 'SELF_CARE_AND_LIVING_SKILLS',
+    history: [
+        {
+            date: new ISODate('2019-01-01T11:48:00Z'),
+            score: 8,
+            comment: 'Feeling good, cleaned my friend\'s flat and cooked her dinner.',
+        },
+        {
+            date: new ISODate('2019-01-10T10:00:00Z'),
+            score: 9,
+            comment: 'Still doing well with cleaning and cooking!',
+        },
+    ],
+};
+db.progress.insert(claireProgressForSelfCareAndLivingSkills);
+
+const claireProgressForPhysicalHealth = {
+    _id: new ObjectId(),
+    type: 'PHYSICAL_HEALTH',
+    history: [
+        {
+            date: new ISODate('2019-01-01T11:48:00Z'),
+            score: 10,
+            comment: 'Healthy at my last check-up. I run regularly.',
+        },
+    ],
+};
+db.progress.insert(claireProgressForPhysicalHealth);
+
+const claireProgressForManagingMoney = {
+    _id: new ObjectId(),
+    type: 'MONEY_MANAGEMENT',
+    history: [
+        {
+            date: new ISODate('2019-01-01T11:48:00Z'),
+            score: 3,
+            comment: 'Spent £100 on new shoes. That was all the money I had.',
+        },
+    ],
+};
+db.progress.insert(claireProgressForManagingMoney);
 
 const claireEvent = {
     _id: new ObjectId(),
@@ -82,8 +144,16 @@ const clientClaire = {
         new DBRef('appointments', apptClaireCityWest._id),
         new DBRef('appointments', apptClaireDoctors._id),
     ],
-    events: [new DBRef('events', claireEvent._id)],
-    progress: [new DBRef('progress', claireProgress._id)],
+    events: [
+        new DBRef('events', claireEvent._id),
+    ],
+    progress: [
+        new DBRef('progress', claireProgressForMotivationAndResponsibility._id),
+        new DBRef('progress', claireProgressForDrugAndAlcoholMisuse._id),
+        new DBRef('progress', claireProgressForSelfCareAndLivingSkills._id),
+        new DBRef('progress', claireProgressForPhysicalHealth._id),
+        new DBRef('progress', claireProgressForManagingMoney._id),
+    ],
     coach: new DBRef('coaches', coachBobId),
     lastCheckedInAt: new ISODate(),
     lastCheckedInLatitude: 53.4851305,
