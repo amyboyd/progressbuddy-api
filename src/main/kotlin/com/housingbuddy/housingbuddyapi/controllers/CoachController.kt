@@ -21,8 +21,8 @@ class CoachController(@Autowired private val coachService: CoachService) {
     ) = coachService.retrieveCoachByID(coachID)
 
     @GetMapping("/{coachID}/clients")
-    @ApiOperation("get coach events")
-    fun retrieveCoachEvents(
+    @ApiOperation("get coach clients")
+    fun retrieveCoachClients(
         @PathVariable coachID: String
     ) = coachService.retrieveCoachByID(coachID)?.clients
 
