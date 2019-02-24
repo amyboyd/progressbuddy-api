@@ -1,7 +1,9 @@
 package com.housingbuddy.housingbuddyapi.services
 
 import com.housingbuddy.housingbuddyapi.models.Client
+import com.housingbuddy.housingbuddyapi.models.Event
 import com.housingbuddy.housingbuddyapi.utils.Collections
+import com.mongodb.DBRef
 import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -33,12 +35,18 @@ class ClientService(@Autowired private val mongoTemplate: MongoTemplate) {
 
         val description: String = descriptionOptions.get(Random().nextInt(descriptionOptions.size))
 
+        val name = retrieveClientByID(clientID)?.name
+        val event = Event(name = "Check-in Event", title = "$name Has Just Checked In!", bodyText = "$name has checked in at $description.", date = Date())
+
+        mongoTemplate.insert(event, Collections.EVENTS_COLLECTION)
+
         mongoTemplate.updateFirst(
             Query.query(Criteria.where("_id").`is`(clientID)),
             Update.update("lastCheckedInLatitude", latitude)
                 .set("lastCheckedInLongitude", longitude)
                 .set("lastCheckedInDescription", description)
-                .currentDate("lastCheckedInAt"),
+                .currentDate("lastCheckedInAt")
+                .push("events", DBRef(Collections.EVENTS_COLLECTION, event.eventID)),
             Client::class.java
         )
 
