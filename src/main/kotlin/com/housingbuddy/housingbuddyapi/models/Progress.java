@@ -29,6 +29,10 @@ public class Progress {
         return history;
     }
 
+    public Progress(Type type) {
+        this.type = type;
+    }
+
     public enum Type {
         MOTIVATION_AND_RESPONSIBILITY,
         MONEY_MANAGEMENT,

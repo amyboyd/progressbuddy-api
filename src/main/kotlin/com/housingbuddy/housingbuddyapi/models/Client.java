@@ -77,7 +77,7 @@ public class Client {
             .stream()
             .filter(p -> p.type == type)
             .findFirst()
-            .orElse(new Progress());
+            .orElse(new Progress(type));
     }
 
     public Integer getLatestProgressScoreByType(@NonNull Progress.Type type) {
