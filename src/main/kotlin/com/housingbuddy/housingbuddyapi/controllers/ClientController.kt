@@ -54,19 +54,7 @@ class ClientController(
         @RequestParam type: Progress.Type,
         @RequestParam score: Int,
         @RequestParam comment: String
-    ) {
-        val client = clientService.retrieveClientByID(clientID)!!
-        val byType = client.getProgressByType(type)
-
-        val newHistory = Progress.ProgressHistory()
-        newHistory.date = Date()
-        newHistory.score = score
-        newHistory.comment = comment
-
-        byType.history.add(newHistory)
-
-        mongoTemplate.save(byType)
-    }
+    ) = clientService.recordProgressScoreByType(clientID, type, score, comment)
 
     @GetMapping("/{clientID}/appointments")
     @ApiOperation("get client appointments")

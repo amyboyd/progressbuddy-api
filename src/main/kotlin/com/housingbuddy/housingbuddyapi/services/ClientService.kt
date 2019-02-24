@@ -2,6 +2,7 @@ package com.housingbuddy.housingbuddyapi.services
 
 import com.housingbuddy.housingbuddyapi.models.Client
 import com.housingbuddy.housingbuddyapi.models.Event
+import com.housingbuddy.housingbuddyapi.models.Progress
 import com.housingbuddy.housingbuddyapi.utils.Collections
 import com.mongodb.DBRef
 import org.bson.types.ObjectId
@@ -53,6 +54,35 @@ class ClientService(@Autowired private val mongoTemplate: MongoTemplate) {
         return retrieveClientByID(clientID)!!
     }
 
+    fun recordProgressScoreByType(
+        clientID: String,
+        type: Progress.Type,
+        score: Int,
+        comment: String
+    ) {
+        val thisDate = Date()
+        val client = retrieveClientByID(clientID)!!
+        val progress = client.getProgressByType(type)
+
+        val newHistory = Progress.ProgressHistory()
+        newHistory.date = thisDate
+        newHistory.score = score
+        newHistory.comment = comment
+
+        progress.history.add(newHistory)
+
+        val name = retrieveClientByID(clientID)?.name
+        val event = Event(name = "Progress Update", title = "$name Has Updated their Progress", bodyText = "$name has changed the progress of $type to $score", date = thisDate)
+        mongoTemplate.save(progress)
+        mongoTemplate.insert(event, Collections.EVENTS_COLLECTION)
+        mongoTemplate.updateFirst(
+            Query.query(Criteria.where("_id").`is`(clientID)),
+            Update()
+                .push("events", DBRef(Collections.EVENTS_COLLECTION, event.eventID))
+                .push("progress", DBRef(Collections.PROGRESS_COLLECTION, progress.progressID)
+            ), Client::class.java
+        )
+    }
     private companion object {
         val LOGGER: Logger = LoggerFactory.getLogger(ClientService::class.java)
     }
