@@ -185,7 +185,7 @@ const coachBob = {
     bio: 'Bob has been working with Depaul since 2012. He studied medicine at UCL and now is a Senior Progression Coach in our Oldham center.',
     jobTitle: 'Senior Progression Coach',
     specialities : "Mental wellbeing",
-    photo: '@todo',
+    photo: 'none.jpg',
     clients: [
         new DBRef('clients', clientClaire._id),
         new DBRef('clients', clientDan._id),
